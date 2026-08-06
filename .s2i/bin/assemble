@@ -4,7 +4,7 @@
 set -e
 export CGO_ENABLED=0
 export GOFLAGS="-trimpath -buildvcs=false"
-export SERVER_PORT=8081
+export PORT=8081
 echo "---> distributor-backend custom assemble"
 echo "---> CGO_ENABLED=${CGO_ENABLED} GOFLAGS=${GOFLAGS}"
 exec /usr/libexec/s2i/assemble

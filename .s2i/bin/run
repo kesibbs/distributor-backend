@@ -1,7 +1,6 @@
 #!/bin/bash
-# Custom run: set the runtime profile env var, then delegate to the
-# builder image's original run script.
-export APP_PROFILE="${APP_PROFILE:-s2i-custom}"
-export PORT=8081
-echo "---> distributor-backend custom run (APP_PROFILE=${APP_PROFILE})"
+# Custom run: set SERVER_PORT, then delegate to the builder image's
+# original run script.
+export SERVER_PORT=8081
+echo "---> distributor-backend custom run (SERVER_PORT=${SERVER_PORT})"
 exec /usr/libexec/s2i/run

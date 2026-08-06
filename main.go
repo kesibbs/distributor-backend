@@ -35,6 +35,8 @@ func writeJSON(w http.ResponseWriter, status int, v interface{}) {
 }
 
 func main() {
+	port := env("SERVER_PORT", "8080")
+
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -45,7 +47,7 @@ func main() {
 		writeJSON(w, http.StatusOK, map[string]interface{}{
 			"service":   "distributor-backend",
 			"version":   env("DIST_VERSION", "dev"),
-			"profile":   env("APP_PROFILE", "default"),
+			"port":      port,
 			"endpoints": []string{"/health", "/api/distributors"},
 		})
 	})
@@ -58,8 +60,6 @@ func main() {
 		writeJSON(w, http.StatusOK, distributors)
 	})
 
-	port := env("PORT", "8080")
-	log.Printf("distributor-backend listening on :%s (profile=%s version=%s)",
-		port, env("APP_PROFILE", "default"), env("DIST_VERSION", "dev"))
+	log.Printf("distributor-backend listening on :%s (version=%s)", port, env("DIST_VERSION", "dev"))
 	log.Fatal(http.ListenAndServe(":"+port, mux))
 }

@@ -1,0 +1,9 @@
+#!/bin/bash
+# Custom assemble: enforce a reproducible build, then delegate to the
+# builder image's original assemble script (STI_SCRIPTS_PATH).
+set -e
+export CGO_ENABLED=0
+export GOFLAGS="-trimpath -buildvcs=false"
+echo "---> distributor-backend custom assemble"
+echo "---> CGO_ENABLED=${CGO_ENABLED} GOFLAGS=${GOFLAGS}"
+exec /usr/libexec/s2i/assemble

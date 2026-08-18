@@ -2,6 +2,7 @@
 # Custom assemble: enforce a reproducible build, then delegate to the
 # builder image's original assemble script.
 set -e
+export SERVER_PORT=8081
 export CGO_ENABLED=0
 export GOFLAGS="-trimpath -buildvcs=false"
 echo "---> distributor-backend custom assemble"

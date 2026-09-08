@@ -1,5 +1,4 @@
 #!/bin/bash
 # Custom run: delegate to the builder image's original run script.
-export SERVER_PORT=8081
 echo "---> distributor-backend custom run"
 exec /usr/libexec/s2i/run
